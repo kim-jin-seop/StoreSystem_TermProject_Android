@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal|center"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btn_checkcount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20px"
+        android:onClick="isClick_ShowInventory"
+        android:text="재고현황확인" />
+
+    <Button
+        android:id="@+id/btn_inputitem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="isClick_AddProduct"
+        android:layout_margin="20px"
+        android:text="재고등록" />
+</LinearLayout>
