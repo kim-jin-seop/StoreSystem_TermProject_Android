@@ -13,10 +13,13 @@ public class TermProject extends AppCompatActivity {
         setContentView(R.layout.activity_term_project);
     }
     public void isClickSeller(View view){
-
+        Intent intent = new Intent(getApplicationContext(),SellerActivity.class);
+        startActivity(intent);
     }
 
     public void isClickProvider(View view) {
+        Intent intent = new Intent(getApplicationContext(),providerActivity.class);
+        startActivity(intent);
     }
 
     public void isClickPos(View view){

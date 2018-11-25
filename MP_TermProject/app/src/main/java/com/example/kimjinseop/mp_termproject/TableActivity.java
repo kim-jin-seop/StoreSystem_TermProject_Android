@@ -1,7 +1,5 @@
 package com.example.kimjinseop.mp_termproject;
 
-
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,13 +11,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 public class TableActivity extends AppCompatActivity {
     DBHelper helper;
@@ -30,6 +28,11 @@ public class TableActivity extends AppCompatActivity {
     ArrayAdapter<String> adapter;
     String tableNum;
     TextView totalprice, menutext, pricetext, numbertext, modetext;
+    long now = System.currentTimeMillis();
+    Date date = new Date(now);
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    String getTime = sdf.format(date);
+    String tradeDate = getTime;
     int mode;
 
     @Override
@@ -56,12 +59,8 @@ public class TableActivity extends AppCompatActivity {
         } catch (SQLiteException ex) {
             db = helper.getReadableDatabase();
         }
-
-        Toast.makeText(this, tableNum.toString(), Toast.LENGTH_SHORT).show();
         reneworderlist();
-
         addmenulist();
-
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ListView listView = (ListView) parent;
@@ -131,10 +130,8 @@ public class TableActivity extends AppCompatActivity {
         }else{
             Toast.makeText(this, "주문한 메뉴가 없습니다.", Toast.LENGTH_LONG).show();
         }
-
-
-
     }
+
     public void payInCard(){
         Cursor cursor = db.rawQuery("SELECT total_price FROM TablePrice WHERE _id = '"+tableNum+"';",null);
         cursor.moveToFirst();
@@ -142,16 +139,12 @@ public class TableActivity extends AppCompatActivity {
         if( sum123 > 0){
             int quantity = 0;
             db.execSQL("UPDATE TABLE_DETAIL_" + tableNum.toString() + " SET quantity = " + quantity + "; ");
-
-
             Toast.makeText(this, sumprice+ "원이 카드로 결제완료되었습니다.", Toast.LENGTH_LONG).show();
             savePaymentCard();
             reneworderlist();
         }else{
             Toast.makeText(this, "주문한 메뉴가 없습니다.", Toast.LENGTH_LONG).show();
         }
-
-
     }
 
     public void addmenulist(){
@@ -165,12 +158,12 @@ public class TableActivity extends AppCompatActivity {
 
     public void savePaymentCard(){
         String card = "카드";
-        db.execSQL("INSERT INTO SELL_INFO VALUES(null, '" + tableNum + "', '" + sumprice + "', '"+card+"' );");
+        db.execSQL("INSERT INTO SELL_INFO VALUES(null, '" + tradeDate + "', '" + sumprice + "', '"+card+"' );");
     }
 
     public void savePaymentCash(){
         String cash = "현금";
-        db.execSQL("INSERT INTO SELL_INFO VALUES(null, '" + tableNum + "', '" + sumprice + "', '"+cash+"' );");
+        db.execSQL("INSERT INTO SELL_INFO VALUES(null, '" + tradeDate + "', '" + sumprice + "', '"+cash+"' );");
     }
 
     public void reneworderlist(){
@@ -190,25 +183,18 @@ public class TableActivity extends AppCompatActivity {
             String quantity = cursor2.getString(3);
             price1 = cursor2.getInt(2);
             quantity1 = cursor2.getInt(3);
-
-
             menunames += menu + "\r\n";
             prices += price + "\r\n";
             quantities += quantity + "\r\n";
-
             sumprice += price1 * quantity1;
         }
-
         menutext.setText(menunames);
         pricetext.setText(prices);
         numbertext.setText(quantities);
-
         db.execSQL("UPDATE TablePrice SET total_price = " + sumprice + " WHERE _id = '"+tableNum+"'; ");
         totalprice.setText( Integer.toString(sumprice)  );
-
-
-
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -222,32 +208,17 @@ public class TableActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
-
     public void showMenu(){
-
         Cursor cursor= db.rawQuery("SELECT * FROM MENU_LIST",null);
-
         while(cursor.moveToNext()){
-
             Toast.makeText(this, cursor.getString(1), Toast.LENGTH_SHORT).show();
-
-
-
         }
-
-
-
     }
-
-
-
 }

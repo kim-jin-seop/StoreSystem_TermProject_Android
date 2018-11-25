@@ -25,22 +25,15 @@ public class posActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pos);
-
         helper = new DBHelper(this);
         try{
             db = helper.getWritableDatabase();
-
         }catch(SQLiteException ex){
             db = helper.getReadableDatabase();
         }
 
         table1price =(TextView) findViewById(R.id.table1price);
-
         db.execSQL("insert into TablePrice values(" + 1 + "," + 0 + ");");
-        db.execSQL("insert into TablePrice values(" + 2 + "," + 0 + ");");
-        db.execSQL("insert into TablePrice values(" + 3 + "," + 0 + ");");
-        db.execSQL("insert into TablePrice values(" + 4 + "," + 0 + ");");
-
         Thread t = new Thread() {
 
             @Override
@@ -89,14 +82,8 @@ public class posActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void addMenu(View v){
-        inputMenu();
-
-    }
     public void onClick(View v) {
-
         switch(v.getId()){
-
             case R.id.button: //table1
                 Intent intent = new Intent(this, TableActivity.class);
                 intent.putExtra("tableNum", "1" );
@@ -134,12 +121,9 @@ public class posActivity extends Activity {
                 }
 
                 if (input2.getText().toString().matches("-?\\d+(\\.\\d+)?"))  {
-                    db.execSQL("INSERT INTO MENU_LIST VALUES(null, '" + menuNames + "', '" + menuPrice + "');");
+                    db.execSQL("INSERT INTO MENU_LIST_COMPANY VALUES(null, '" + menuNames + "', '" + menuPrice + "');");
                     Toast.makeText(getApplicationContext(), "추가됨", Toast.LENGTH_SHORT).show();
                     db.execSQL("INSERT INTO TABLE_DETAIL_1 VALUES(null,'" + menuNames + "','" + menuPrice + "', '"+ 0 + "');");
-                    db.execSQL("INSERT INTO TABLE_DETAIL_2 VALUES(null,'" + menuNames + "','" + menuPrice + "', '"+ 0 + "');");
-                    db.execSQL("INSERT INTO TABLE_DETAIL_3 VALUES(null,'" + menuNames + "','" + menuPrice + "', '"+ 0 + "');");
-                    db.execSQL("INSERT INTO TABLE_DETAIL_4 VALUES(null,'" + menuNames + "','" + menuPrice + "', '" + 0 + "');");
                 } else {
                     Toast.makeText(getApplicationContext(), "잘못된 금액입니다. 다시 시도해 주십시오.", Toast.LENGTH_SHORT).show();
                     input2.setText("");

@@ -18,13 +18,10 @@ public class tsinfo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tsinfo);
-
         idnum = (TextView) findViewById(R.id.idnum);
-        tableNum = (TextView) findViewById(R.id.tableNum);
+        tableNum = (TextView) findViewById(R.id.date);
         price = (TextView) findViewById(R.id.price);
         paymentcheck = (TextView) findViewById(R.id.paymentcheck);
-
-
 
         helper = new DBHelper(this);
         try {
@@ -35,29 +32,22 @@ public class tsinfo extends AppCompatActivity {
         }
 
 
-        Cursor cursor2 = db.rawQuery("SELECT * FROM SELL_INFO;",null);
+        Cursor cursor = db.rawQuery("SELECT * FROM SELL_INFO;",null);
 
-        String idnumber ="번호 \r\n";
-        String prices="가격 \r\n";
-        String tablenum="테이블번호 \r\n";
+        String idnumber ="거래 번호 \r\n";
+        String prices="거래 금액 \r\n";
+        String Date="거래 날짜\r\n";
         String payment="현금/카드 \r\n";
-        while(cursor2.moveToNext()){
-
-
-            idnumber += cursor2.getString(0) + "\r\n";
-            tablenum += cursor2.getString(1) + "\r\n";
-            prices+= cursor2.getString(2)+ "\r\n";
-            payment +=cursor2.getString(3)+ "\r\n";
-
+        while(cursor.moveToNext()){
+            idnumber += cursor.getString(0) + "\r\n";
+            Date += cursor.getString(1) + "\r\n";
+            prices+= cursor.getString(2)+ "\r\n";
+            payment +=cursor.getString(3)+ "\r\n";
         }
         idnum.setText(idnumber);
-        tableNum.setText(tablenum);
+        tableNum.setText(Date);
         price.setText(prices);
         paymentcheck.setText(payment);
-
-
-
-
     }
 
     @Override
@@ -69,11 +59,9 @@ public class tsinfo extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }
