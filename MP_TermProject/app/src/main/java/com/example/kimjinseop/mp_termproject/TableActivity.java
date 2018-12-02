@@ -66,7 +66,6 @@ public class TableActivity extends AppCompatActivity {
                 ListView listView = (ListView) parent;
                 Cursor cursor;
                 String menu = listMenu.get(position);
-
                 if (mode == 1) {
                     int quantity = 0;
                     cursor = db.rawQuery("SELECT quantity FROM TABLE_DETAIL_" + tableNum + " WHERE menu='" + menu + "';", null);
@@ -96,9 +95,8 @@ public class TableActivity extends AppCompatActivity {
     }
 
     public void onClick(View v) {
-
         switch (v.getId()) {
-            case R.id.addmode:
+            case R.id.removemode:
                 mode = 1;
                 Toast.makeText(this, "메뉴를선택하면 추가됩니다.", Toast.LENGTH_LONG).show();
                 modetext.setText("주문추가");
@@ -108,7 +106,7 @@ public class TableActivity extends AppCompatActivity {
                 Toast.makeText(this, "메뉴를선택하면 삭제됩니다.", Toast.LENGTH_LONG).show();
                 modetext.setText("주문삭제");
                 break;
-            case R.id.button9: // 현금결제
+            case R.id.modifymode: // 현금결제
                 payInCash();
                 break;
             case R.id.button8: //카드결제

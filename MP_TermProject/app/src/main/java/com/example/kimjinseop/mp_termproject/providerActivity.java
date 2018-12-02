@@ -3,6 +3,7 @@ package com.example.kimjinseop.mp_termproject;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
@@ -64,13 +65,17 @@ public class providerActivity extends Activity {
                 String menuNames = input1.getText().toString();
                 String menuPrice = input2.getText().toString();
                 String regexStr = "^[0-9]*$";
+                if(!hasTitle(menuNames)){
+                    Toast.makeText(getApplicationContext(), "중복된 이름이 존재합니다.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if(input2.getText().toString().trim().matches(regexStr)) { }
                 else{
                     //write code for failure
                 }
-                     if (input2.getText().toString().matches("-?\\d+(\\.\\d+)?"))  {
-                    db.execSQL("INSERT INTO COMPANY_PRODUCT VALUES(null,'" + menuNames + "','" + menuPrice + "', '"+ 0 + "','"+CompanyName +"');");
-                         Toast.makeText(getApplicationContext(), "추가됨", Toast.LENGTH_SHORT).show();
+                if (input2.getText().toString().matches("-?\\d+(\\.\\d+)?"))  {
+                    db.execSQL("INSERT INTO MENU_COMPANY VALUES(null,'" + menuNames + "','" + menuPrice + "','"+CompanyName +"');");
+                    Toast.makeText(getApplicationContext(), "추가됨", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getApplicationContext(), "잘못된 금액입니다. 다시 시도해 주십시오.", Toast.LENGTH_SHORT).show();
                     input2.setText("");
@@ -83,4 +88,16 @@ public class providerActivity extends Activity {
         });
         alert.show();
     }
+
+    public boolean hasTitle(String title){
+        Cursor cursor = db.rawQuery("SELECT * FROM MENU_COMPANY;",null);
+        while(cursor.moveToNext()){
+            String menu = cursor.getString(1);
+            if(menu.equals(title))
+                return false;
+        }
+        return true;
+    }
+
+
 }

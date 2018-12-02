@@ -79,7 +79,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="현금계산"
-        android:id="@+id/button9"
+        android:id="@+id/modifymode"
         android:layout_alignTop="@+id/button8"
         android:layout_toRightOf="@+id/button8"
         android:layout_toEndOf="@+id/button8"
@@ -129,19 +129,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/menuList"
-        android:layout_toEndOf="@+id/button9"
-        android:layout_toRightOf="@+id/button9"
+        android:layout_toEndOf="@+id/modifymode"
+        android:layout_toRightOf="@+id/modifymode"
         android:layout_below="@+id/tableLayout"
-        android:layout_above="@+id/addmode"
+        android:layout_above="@+id/removemode"
         android:background="#FFD9FA" />
 
     <Button
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:text="주문추가"
-        android:id="@+id/addmode"
-        android:layout_alignBottom="@+id/button9"
-        android:layout_toRightOf="@+id/button9"
+        android:id="@+id/removemode"
+        android:layout_alignBottom="@+id/modifymode"
+        android:layout_toRightOf="@+id/modifymode"
         android:onClick="onClick" />
 
     <Button
@@ -150,8 +150,8 @@
         android:text="주문삭제"
         android:id="@+id/deletemode"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/addmode"
-        android:layout_toEndOf="@+id/addmode"
+        android:layout_toRightOf="@+id/removemode"
+        android:layout_toEndOf="@+id/removemode"
         android:onClick="onClick" />
 
     <TextView
@@ -180,8 +180,8 @@
         android:layout_alignTop="@+id/pricetext"
         android:layout_alignLeft="@+id/textView10"
         android:layout_alignStart="@+id/textView10"
-        android:layout_alignRight="@+id/button9"
-        android:layout_alignEnd="@+id/button9" />
+        android:layout_alignRight="@+id/modifymode"
+        android:layout_alignEnd="@+id/modifymode" />
 
     <TextView
         android:layout_width="wrap_content"

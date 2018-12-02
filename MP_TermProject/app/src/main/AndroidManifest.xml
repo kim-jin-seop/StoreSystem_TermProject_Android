@@ -23,6 +23,7 @@
         <activity android:name=".SellerActivity"></activity>
         <activity android:name=".providerActivity"></activity>
         <activity android:name=".SellerCheckActivity"></activity>
+        <activity android:name="CompanyData"></activity>
     </application>
 
 </manifest>

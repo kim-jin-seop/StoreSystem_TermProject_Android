@@ -97,6 +97,9 @@ public class posActivity extends Activity {
         }
     }
 
+
+
+    // 없는 기술
     public void inputMenu(){
         LayoutInflater factory = LayoutInflater.from(this);
         final View textEntryView = factory.inflate(R.layout.alert_dialog, null);
