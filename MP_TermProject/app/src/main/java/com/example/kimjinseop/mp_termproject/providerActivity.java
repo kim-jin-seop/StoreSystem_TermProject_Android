@@ -12,10 +12,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+//기업
 public class providerActivity extends Activity {
     SQLiteDatabase db;
     DBHelper helper;
-    final String CompanyName = "TestCompany";
+    final String CompanyName = "농심(제과)";
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -27,11 +28,17 @@ public class providerActivity extends Activity {
         }catch(SQLiteException ex){
             db = helper.getReadableDatabase();
         }
+        helper.useDB(db);
         setContentView(R.layout.activity_provider);
     }
 
     public void isClickSellerCheck(View view){
         Intent intent = new Intent(this,SellerCheckActivity.class);
+        startActivity(intent);
+    }
+
+    public void showData(View v){
+        Intent intent = new Intent(this, CompanyData.class);
         startActivity(intent);
     }
 
@@ -45,7 +52,7 @@ public class providerActivity extends Activity {
 
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
-        alert.setTitle("New Menu : "+CompanyName);
+        alert.setTitle("제품 등록 회사명 : "+CompanyName);
         alert.setMessage("제품의 이름과 가격을 입력하세요");
         alert.setView(textEntryView);
 
@@ -57,17 +64,13 @@ public class providerActivity extends Activity {
                 String menuNames = input1.getText().toString();
                 String menuPrice = input2.getText().toString();
                 String regexStr = "^[0-9]*$";
-
                 if(input2.getText().toString().trim().matches(regexStr)) { }
                 else{
                     //write code for failure
                 }
-                if (input2.getText().toString().matches("-?\\d+(\\.\\d+)?"))  {
-                    db.execSQL("CREATE TABLE IF NOT EXISTS MENU_COMPANY( _id INTEGER PRIMARY KEY AUTOINCREMENT, menu TEXT, price INTEGER, name TEXT);");
-                    db.execSQL("CREATE TABLE IF NOT EXISTS Show_PRODUCT( _id INTEGER PRIMARY KEY AUTOINCREMENT, menu TEXT, price INTEGER, quantity INTEGER, name TEXT);");
-                    db.execSQL("INSERT INTO MENU_COMPANY VALUES(null,'" + menuNames + "','" + menuPrice + "','"+CompanyName+"');");
-                    Toast.makeText(getApplicationContext(), "추가됨", Toast.LENGTH_SHORT).show();
-                    db.execSQL("INSERT INTO Show_PRODUCT VALUES(null,'" + menuNames + "','" + menuPrice + "', '"+ 0 + "','"+CompanyName +"');");
+                     if (input2.getText().toString().matches("-?\\d+(\\.\\d+)?"))  {
+                    db.execSQL("INSERT INTO COMPANY_PRODUCT VALUES(null,'" + menuNames + "','" + menuPrice + "', '"+ 0 + "','"+CompanyName +"');");
+                         Toast.makeText(getApplicationContext(), "추가됨", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getApplicationContext(), "잘못된 금액입니다. 다시 시도해 주십시오.", Toast.LENGTH_SHORT).show();
                     input2.setText("");

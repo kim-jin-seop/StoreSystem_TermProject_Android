@@ -2,8 +2,10 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/image4"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -47,7 +49,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="isClickSellerCheck"
-                android:text="판매업체 DB 확인" />
+                android:text="들어온 주문 확인" />
         </LinearLayout>
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="showData"
+            android:text="판매물품관리" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

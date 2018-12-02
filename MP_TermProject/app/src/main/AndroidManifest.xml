@@ -18,7 +18,7 @@
         <activity android:name=".posActivity"></activity>
         <activity android:name=".TableActivity" />
         <activity android:name=".tsinfo"></activity>
-        <activity android:name=".AddProduct_SellerActivity"></activity>
+        <activity android:name=".autoProduct_SellerActivity"></activity>
         <activity android:name=".ShowInven_SellerActivity"></activity>
         <activity android:name=".SellerActivity"></activity>
         <activity android:name=".providerActivity"></activity>

@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+//포스
 public class posActivity extends Activity {
     DBHelper helper;
     SQLiteDatabase db;

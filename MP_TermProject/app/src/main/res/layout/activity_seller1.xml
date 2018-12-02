@@ -2,23 +2,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/image5"
     android:layout_height="match_parent"
     android:gravity="center_horizontal|center"
     android:orientation="vertical">
 
     <Button
+        android:id="@+id/button2"
+        android:layout_width="161dp"
+        android:layout_height="wrap_content"
+        android:text="재고등록" />
+
+    <Button
         android:id="@+id/btn_checkcount"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_margin="20px"
+        android:background="#9900AA33"
         android:onClick="isClick_ShowInventory"
         android:text="재고현황확인" />
 
     <Button
         android:id="@+id/btn_inputitem"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:onClick="isClick_AddProduct"
         android:layout_margin="20px"
-        android:text="재고등록" />
+        android:onClick="isClick_AddProduct"
+        android:text="자동발주" />
 </LinearLayout>

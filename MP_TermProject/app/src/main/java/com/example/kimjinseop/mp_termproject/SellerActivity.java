@@ -10,12 +10,14 @@ public class SellerActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seller1);
     }
+
     public void isClick_ShowInventory(View view){
         Intent intent = new Intent(getApplicationContext(),ShowInven_SellerActivity.class);
         startActivity(intent);
     }
+
     public void isClick_AddProduct(View view){
-        Intent intent = new Intent(getApplicationContext(),AddProduct_SellerActivity.class);
+        Intent intent = new Intent(getApplicationContext(),autoProduct_SellerActivity.class);
         startActivity(intent);
     }
 }
