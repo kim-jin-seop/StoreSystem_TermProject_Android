@@ -21,7 +21,7 @@ import java.util.ArrayList;
 //기업 - 판매판매물품관리
 public class CompanyData extends Activity{
     ListView lv;
-    int mode = 1;
+    int mode = 0;
     DBHelper helper;
     ArrayAdapter<String> adapter;
     String prevName;
@@ -34,6 +34,14 @@ public class CompanyData extends Activity{
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_showcompanydata);
+        helper = new DBHelper(this);
+        try{
+            db = helper.getWritableDatabase();
+
+        }catch(SQLiteException ex){
+            db = helper.getReadableDatabase();
+        }
+        helper.useDB(db);
         pricetext = (TextView) findViewById(R.id.pricetext);
         menutext = (TextView) findViewById(R.id.menutext);
         madeList();
@@ -43,21 +51,13 @@ public class CompanyData extends Activity{
     public void madeList(){
         lv = (ListView) findViewById(R.id.menuList);
         listMenu = new ArrayList<String>();
-        helper = new DBHelper(this);
-        try{
-            db = helper.getWritableDatabase();
-
-        }catch(SQLiteException ex){
-            db = helper.getReadableDatabase();
-        }
-        helper.useDB(db);
         addmenulist();
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 prevName = listMenu.get(position);
                 if (mode == 1) {
                     ModifyMenu();
-                } else {
+                } else if(mode == 2){
                     delete();
                 }
 
@@ -66,6 +66,12 @@ public class CompanyData extends Activity{
     }
     public void delete(){
         synchronized (db){
+            Cursor c = db.rawQuery("SELECT * FROM MENU_COMPANY WHERE menu = '"+prevName+"';",null);
+            c.moveToNext();
+            int key = c.getInt(0);
+            db.execSQL("DELETE FROM BUY_SELLER WHERE fkey = '"+key+"';");
+            db.execSQL("DELETE FROM SELLER_LIST WHERE fkey = '"+key+"';");
+            db.execSQL("DELETE FROM SELECT_SELLER WHERE menu = '"+prevName+"';");
             db.execSQL("DELETE FROM MENU_COMPANY WHERE menu = '"+prevName+"';");
         }
         madeList();
@@ -98,6 +104,7 @@ public class CompanyData extends Activity{
         alert.setView(textEntryView);
 
         final EditText input1 = (EditText) textEntryView.findViewById(R.id.edtMenu);
+        input1.setText(prevName);
         final EditText input2 = (EditText) textEntryView.findViewById(R.id.edtPrice);
 
         alert.setPositiveButton("수정", new DialogInterface.OnClickListener() {
@@ -116,8 +123,9 @@ public class CompanyData extends Activity{
                 }
                 if (input2.getText().toString().matches("-?\\d+(\\.\\d+)?"))  {
                     synchronized (db){
-                        db.execSQL("UPDATE MENU_COMPANY SET menu = '"+menuName+"' WHERE menu ='"+ prevName + "';");
+                        db.execSQL("UPDATE SELECT_SELLER SET menu = '"+menuName+"' WHERE menu ='"+ prevName + "';");
                         db.execSQL("UPDATE MENU_COMPANY SET price = "+menuPrice+" WHERE menu ='"+ prevName + "';");
+                        db.execSQL("UPDATE MENU_COMPANY SET menu = '"+menuName+"' WHERE menu ='"+ prevName + "';");
                     }
                     Toast.makeText(getApplicationContext(), "수정완료", Toast.LENGTH_SHORT).show();
                 } else {
@@ -156,7 +164,10 @@ public class CompanyData extends Activity{
         return true;
     }
     public void left_List(){
-        Cursor  cursor = db.rawQuery("SELECT * FROM MENU_COMPANY;",null);
+        Cursor cursor;
+        synchronized (db){
+            cursor = db.rawQuery("SELECT * FROM MENU_COMPANY;",null);
+        }
         String menunames="";
         String prices="";
         menutext.setText(menunames);

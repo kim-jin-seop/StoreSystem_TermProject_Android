@@ -9,17 +9,39 @@
     >
 
     <TableLayout
-        android:id="@+id/tableLayout"
         android:layout_width="200dp"
         android:layout_height="30dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
+        android:id="@+id/tableLayout"
         android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_marginTop="42dp">
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            >
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="상품"
+                android:id="@+id/menuId"
+                android:layout_column="0" />
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="단가"
+                android:id="@+id/price"
+                android:layout_column="1" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="2"
+                android:text="기업제품명" />
 
         </TableRow>
 
@@ -60,8 +82,8 @@
         android:layout_alignTop="@+id/button8"
         android:layout_toEndOf="@+id/button8"
         android:layout_toRightOf="@+id/button8"
-        android:onClick="process"
-        android:text="처리완료" />
+        android:onClick="modify"
+        android:text="상품수정" />
 
     <TextView
         android:id="@+id/textView6"
@@ -70,7 +92,7 @@
         android:layout_alignTop="@+id/tableLayout"
         android:layout_toEndOf="@+id/textView10"
         android:layout_toRightOf="@+id/textView10"
-        android:text="주문리스트"
+        android:text="(주)농심"
         android:textSize="20dp" />
 
     <TextView
@@ -79,7 +101,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="주문내역관리"
+        android:text="판매업체-물품등록"
         android:textColor="#0000FF"
         android:textSize="20dp" />
 
@@ -95,12 +117,22 @@
 
     <Button
         android:id="@+id/removemode"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/addmode"
         android:layout_toRightOf="@+id/addmode"
+        android:onClick="add"
+        android:text="상품추가" />
+
+    <Button
+        android:id="@+id/deletemode"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/removemode"
+        android:layout_toRightOf="@+id/removemode"
         android:onClick="delete"
-        android:text="." />
+        android:text="상품삭제" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -116,31 +148,30 @@
         android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tableLayout"
-        android:layout_marginStart="35dp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="3dp"
         android:layout_toStartOf="@+id/nametext"
         android:layout_toLeftOf="@+id/nametext"
-        android:layout_toEndOf="@+id/menutext"
-        android:layout_toRightOf="@+id/menutext"
         android:text="New Text" />
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
+        android:layout_width="20dp"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/button7"
-        android:layout_alignBottom="@+id/textView6"
-        android:text="상품" />
+        android:text="New Text"
+        android:id="@+id/nametext"
+        android:layout_alignTop="@+id/pricetext"
+        android:layout_alignLeft="@+id/textView10"
+        android:layout_alignStart="@+id/textView10"
+        android:layout_alignRight="@+id/addmode"
+        android:layout_alignEnd="@+id/addmode" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/tableLayout"
+        android:textSize="17dp"
+        android:textColor="#FF0F00"
         android:layout_alignStart="@+id/pricetext"
-        android:layout_alignTop="@+id/textView3"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="0dp"
-        android:text="개수" />
+        android:layout_marginBottom="-42dp"
+        android:text="등록된물품" />
 
 </RelativeLayout>

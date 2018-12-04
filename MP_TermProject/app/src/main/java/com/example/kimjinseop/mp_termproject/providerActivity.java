@@ -17,7 +17,7 @@ import android.widget.Toast;
 public class providerActivity extends Activity {
     SQLiteDatabase db;
     DBHelper helper;
-    final String CompanyName = "농심(제과)";
+    final String CompanyName = "(주)농심";
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -75,6 +75,7 @@ public class providerActivity extends Activity {
                 }
                 if (input2.getText().toString().matches("-?\\d+(\\.\\d+)?"))  {
                     db.execSQL("INSERT INTO MENU_COMPANY VALUES(null,'" + menuNames + "','" + menuPrice + "','"+CompanyName +"');");
+                    db.execSQL("INSERT INTO SELECT_SELLER VALUES(null,'"+menuNames+"','"+0+"');");
                     Toast.makeText(getApplicationContext(), "추가됨", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getApplicationContext(), "잘못된 금액입니다. 다시 시도해 주십시오.", Toast.LENGTH_SHORT).show();

@@ -60,8 +60,8 @@
         android:layout_alignTop="@+id/button8"
         android:layout_toEndOf="@+id/button8"
         android:layout_toRightOf="@+id/button8"
-        android:onClick="process"
-        android:text="처리완료" />
+        android:onClick="add"
+        android:text="상품 발주" />
 
     <TextView
         android:id="@+id/textView6"
@@ -70,7 +70,7 @@
         android:layout_alignTop="@+id/tableLayout"
         android:layout_toEndOf="@+id/textView10"
         android:layout_toRightOf="@+id/textView10"
-        android:text="주문리스트"
+        android:text="제품(o/x)"
         android:textSize="20dp" />
 
     <TextView
@@ -79,7 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="주문내역관리"
+        android:text="판매업체-발주"
         android:textColor="#0000FF"
         android:textSize="20dp" />
 
@@ -95,12 +95,12 @@
 
     <Button
         android:id="@+id/removemode"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/addmode"
         android:layout_toRightOf="@+id/addmode"
         android:onClick="delete"
-        android:text="." />
+        android:text="발주 취소" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -141,6 +141,6 @@
         android:layout_alignTop="@+id/textView3"
         android:layout_marginStart="3dp"
         android:layout_marginTop="0dp"
-        android:text="개수" />
+        android:text="발주 수량" />
 
 </RelativeLayout>

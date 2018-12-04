@@ -9,18 +9,17 @@
     >
 
     <TableLayout
+        android:id="@+id/tableLayout"
         android:layout_width="200dp"
         android:layout_height="30dp"
-        android:id="@+id/tableLayout"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
         android:layout_marginTop="42dp">
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
 
         </TableRow>
 
@@ -55,7 +54,7 @@
         android:text="닫기" />
 
     <Button
-        android:id="@+id/modifymode"
+        android:id="@+id/addmode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/button8"
@@ -88,8 +87,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/menuList"
-        android:layout_toEndOf="@+id/modifymode"
-        android:layout_toRightOf="@+id/modifymode"
+        android:layout_toEndOf="@+id/addmode"
+        android:layout_toRightOf="@+id/addmode"
         android:layout_below="@+id/tableLayout"
         android:layout_above="@+id/removemode"
         android:background="#FFD9FA" />
@@ -98,8 +97,8 @@
         android:id="@+id/removemode"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/modifymode"
-        android:layout_toRightOf="@+id/modifymode"
+        android:layout_alignBottom="@+id/addmode"
+        android:layout_toRightOf="@+id/addmode"
         android:onClick="delete"
         android:text="상품삭제" />
 
@@ -120,8 +119,8 @@
         android:layout_marginStart="35dp"
         android:layout_marginLeft="35dp"
         android:layout_marginTop="3dp"
-        android:layout_toStartOf="@+id/numbertext"
-        android:layout_toLeftOf="@+id/numbertext"
+        android:layout_toStartOf="@+id/nametext"
+        android:layout_toLeftOf="@+id/nametext"
         android:layout_toEndOf="@+id/menutext"
         android:layout_toRightOf="@+id/menutext"
         android:text="New Text" />

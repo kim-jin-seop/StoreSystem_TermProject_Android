@@ -38,15 +38,15 @@
         android:layout_marginStart="55dp" />
 
     <TextView
+        android:id="@+id/price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="거래 금액"
-        android:id="@+id/price"
         android:layout_below="@+id/textView11"
-        android:layout_toRightOf="@+id/date"
-        android:layout_toEndOf="@+id/date"
+        android:layout_marginStart="39dp"
         android:layout_marginLeft="39dp"
-        android:layout_marginStart="39dp" />
+        android:layout_toEndOf="@+id/date"
+        android:layout_toRightOf="@+id/date"
+        android:text="거래 금액" />
 
     <TextView
         android:layout_width="wrap_content"

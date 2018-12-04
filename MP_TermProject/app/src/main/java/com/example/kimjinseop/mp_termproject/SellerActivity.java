@@ -16,6 +16,16 @@ public class SellerActivity extends Activity {
         startActivity(intent);
     }
 
+    public void isClick_Enroll(View v){
+        Intent intent = new Intent(getApplicationContext(),SellerEnroll.class);
+        startActivity(intent);
+    }
+
+    public void isClick_add(View v){
+        Intent intent = new Intent(getApplicationContext(),Selleradd.class);
+        startActivity(intent);
+    }
+
     public void isClick_AddProduct(View view){
         Intent intent = new Intent(getApplicationContext(),autoProduct_SellerActivity.class);
         startActivity(intent);

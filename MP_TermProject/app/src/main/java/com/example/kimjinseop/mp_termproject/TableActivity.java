@@ -44,7 +44,7 @@ public class TableActivity extends AppCompatActivity {
         totalprice = (TextView) findViewById(R.id.totalprice);
         menutext = (TextView) findViewById(R.id.menutext);
         pricetext = (TextView) findViewById(R.id.pricetext);
-        numbertext = (TextView) findViewById(R.id.numbertext);
+        numbertext = (TextView) findViewById(R.id.nametext);
         modetext = (TextView) findViewById(R.id.modetext);
         tableNum = intent.getExtras().getString("tableNum"); //테이블의 넘버를 받는다.
         lv = (ListView) findViewById(R.id.menuList);
@@ -106,7 +106,7 @@ public class TableActivity extends AppCompatActivity {
                 Toast.makeText(this, "메뉴를선택하면 삭제됩니다.", Toast.LENGTH_LONG).show();
                 modetext.setText("주문삭제");
                 break;
-            case R.id.modifymode: // 현금결제
+            case R.id.addmode: // 현금결제
                 payInCash();
                 break;
             case R.id.button8: //카드결제
@@ -213,10 +213,4 @@ public class TableActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void showMenu(){
-        Cursor cursor= db.rawQuery("SELECT * FROM MENU_LIST",null);
-        while(cursor.moveToNext()){
-            Toast.makeText(this, cursor.getString(1), Toast.LENGTH_SHORT).show();
-        }
-    }
 }
