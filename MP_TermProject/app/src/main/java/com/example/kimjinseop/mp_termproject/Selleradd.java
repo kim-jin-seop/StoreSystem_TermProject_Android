@@ -29,7 +29,6 @@ public class Selleradd extends Activity{
     ArrayList<String> listMenu;
     TextView menutext, pricetext;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);

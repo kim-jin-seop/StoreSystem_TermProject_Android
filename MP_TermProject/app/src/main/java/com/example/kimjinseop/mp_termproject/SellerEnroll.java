@@ -40,7 +40,6 @@ public class SellerEnroll extends Activity{
         }catch(SQLiteException ex){
             db = helper.getReadableDatabase();
         }
-//        helper.cleanDB(db);
         helper.useDB(db);
         nametext = (TextView) findViewById(R.id.nametext);
         pricetext = (TextView) findViewById(R.id.pricetext);
@@ -105,7 +104,7 @@ public class SellerEnroll extends Activity{
                     }
                     if (input2.getText().toString().matches("-?\\d+(\\.\\d+)?"))  {
                         db.execSQL("INSERT INTO BUY_SELLER VALUES(null,'"+ menuNames + "','" + 0 + "','" + key +"');");
-                        db.execSQL("INSERT INTO SELLER_LIST VALUES(null,'"+ key +"','" + menuNames + "','" + menuPrice + "','" + name +"','"+0+"');");
+                        db.execSQL("INSERT INTO SELLER_LIST VALUES(null,'"+ key +"','" + menuNames + "','" + menuPrice + "','" + name +"','"+0+"','"+0+"');");
                         db.execSQL("UPDATE SELECT_SELLER SET use = 1 WHERE menu ='"+ prevName + "';");
                         db.execSQL("INSERT INTO MENU_LIST VALUES(null, '" + menuNames + "', '" + menuPrice + "','"+key+"');");
                         db.execSQL("INSERT INTO TABLE_DETAIL_1 VALUES(null,'" + menuNames + "','" + menuPrice + "', '"+ 0 + "','"+key+"');");

@@ -71,6 +71,8 @@ public class CompanyData extends Activity{
             int key = c.getInt(0);
             db.execSQL("DELETE FROM BUY_SELLER WHERE fkey = '"+key+"';");
             db.execSQL("DELETE FROM SELLER_LIST WHERE fkey = '"+key+"';");
+            db.execSQL("DELETE FROM TABLE_DETAIL_1 WHERE fkey = '"+key+"';");
+            db.execSQL("DELETE FROM MENU_LIST WHERE fkey = '"+key+"';");
             db.execSQL("DELETE FROM SELECT_SELLER WHERE menu = '"+prevName+"';");
             db.execSQL("DELETE FROM MENU_COMPANY WHERE menu = '"+prevName+"';");
         }

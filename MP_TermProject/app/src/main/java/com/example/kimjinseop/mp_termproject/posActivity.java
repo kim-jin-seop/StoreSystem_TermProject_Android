@@ -32,7 +32,7 @@ public class posActivity extends Activity {
         }catch(SQLiteException ex){
             db = helper.getReadableDatabase();
         }
-
+        helper.useDB(db);
         table1price =(TextView) findViewById(R.id.table1price);
         db.execSQL("insert into TablePrice values(" + 1 + "," + 0 + ");");
         Thread t = new Thread() {

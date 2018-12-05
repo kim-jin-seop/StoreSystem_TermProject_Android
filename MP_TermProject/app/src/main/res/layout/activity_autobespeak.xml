@@ -9,38 +9,17 @@
     >
 
     <TableLayout
+        android:id="@+id/tableLayout"
         android:layout_width="200dp"
         android:layout_height="30dp"
-        android:id="@+id/tableLayout"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
         android:layout_marginTop="42dp">
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="389dp">
-
-            <TextView
-                android:id="@+id/menuId"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_column="0"
-                android:text="상품" />
-
-            <TextView
-                android:id="@+id/price"
-                android:layout_width="70dp"
-                android:layout_height="match_parent"
-                android:layout_column="1"
-                android:text="단가" />
-
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="2"
-                android:text="수량" />
+            android:layout_height="match_parent">
 
         </TableRow>
 
@@ -71,8 +50,8 @@
         android:layout_alignTop="@+id/button7"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:onClick="onClick"
-        android:text="등록" />
+        android:onClick="close"
+        android:text="닫기" />
 
     <Button
         android:id="@+id/addmode"
@@ -81,8 +60,8 @@
         android:layout_alignTop="@+id/button8"
         android:layout_toEndOf="@+id/button8"
         android:layout_toRightOf="@+id/button8"
-        android:onClick="onClick"
-        android:text="취소" />
+        android:onClick="cancel"
+        android:text="자동발주 취소" />
 
     <TextView
         android:id="@+id/textView6"
@@ -91,7 +70,7 @@
         android:layout_alignTop="@+id/tableLayout"
         android:layout_toEndOf="@+id/textView10"
         android:layout_toRightOf="@+id/textView10"
-        android:text="재고리스트"
+        android:text="발주(o/x)"
         android:textSize="20dp" />
 
     <TextView
@@ -100,7 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="EnrollSystem2018"
+        android:text="자동 발주 설정"
         android:textColor="#0000FF"
         android:textSize="20dp" />
 
@@ -120,18 +99,8 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/addmode"
         android:layout_toRightOf="@+id/addmode"
-        android:onClick="onClick"
-        android:text="자동발주증가" />
-
-    <Button
-        android:id="@+id/deletemode"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@+id/removemode"
-        android:layout_toRightOf="@+id/removemode"
-        android:onClick="onClick"
-        android:text="자동발주감소" />
+        android:onClick="option"
+        android:text="자동발주 설정" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -143,33 +112,35 @@
         android:layout_alignParentStart="true" />
 
     <TextView
+        android:id="@+id/pricetext"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/pricetext"
         android:layout_below="@+id/tableLayout"
+        android:layout_marginStart="35dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="3dp"
+        android:layout_toStartOf="@+id/nametext"
         android:layout_toLeftOf="@+id/nametext"
-        android:layout_toStartOf="@+id/nametext" />
+        android:layout_toEndOf="@+id/menutext"
+        android:layout_toRightOf="@+id/menutext"
+        android:text="New Text" />
 
     <TextView
-        android:layout_width="20dp"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/nametext"
-        android:layout_alignTop="@+id/pricetext"
-        android:layout_alignLeft="@+id/textView10"
-        android:layout_alignStart="@+id/textView10"
-        android:layout_alignRight="@+id/addmode"
-        android:layout_alignEnd="@+id/addmode" />
-
-    <TextView
-        android:id="@+id/modetext"
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/deletemode"
-        android:layout_alignRight="@+id/deletemode"
-        android:layout_alignBottom="@+id/textView10"
-        android:text="증가"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:layout_alignStart="@+id/button7"
+        android:layout_alignBottom="@+id/textView6"
+        android:text="상품" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/pricetext"
+        android:layout_alignTop="@+id/textView3"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="0dp"
+        android:text="수량 하한선" />
 
 </RelativeLayout>

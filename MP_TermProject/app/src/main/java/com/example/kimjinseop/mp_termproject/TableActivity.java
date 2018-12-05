@@ -59,6 +59,7 @@ public class TableActivity extends AppCompatActivity {
         } catch (SQLiteException ex) {
             db = helper.getReadableDatabase();
         }
+        helper.useDB(db);
         reneworderlist();
         addmenulist();
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -72,7 +73,14 @@ public class TableActivity extends AppCompatActivity {
                     while (cursor.moveToNext()) {
                         quantity = cursor.getInt(0) + 1;
                     }
-                    db.execSQL("UPDATE TABLE_DETAIL_" + tableNum.toString() + " SET quantity = " + quantity + " WHERE menu='" + menu + "'; ");
+                    cursor = db.rawQuery("SELECT num FROM SELLER_LIST WHERE menu='" + menu + "';", null);
+                    cursor.moveToNext();
+                    int num = cursor.getInt(0);
+                    if(quantity <= num){
+                        db.execSQL("UPDATE TABLE_DETAIL_" + tableNum.toString() + " SET quantity = " + quantity + " WHERE menu='" + menu + "'; ");
+                    }else{
+                        noStore();
+                    }
                 } else {
                     int quantity = 0;
                     cursor = db.rawQuery("SELECT quantity FROM TABLE_DETAIL_" + tableNum + " WHERE menu='" + menu + "';", null);
@@ -88,6 +96,10 @@ public class TableActivity extends AppCompatActivity {
                 reneworderlist();
             }
         });
+    }
+
+    public void noStore(){
+        Toast.makeText(this, "더 이상 재고가 존재하지 않습니다.", Toast.LENGTH_LONG).show();
     }
 
     public void notmenuorder(){
@@ -116,6 +128,37 @@ public class TableActivity extends AppCompatActivity {
     }
 
     public void payInCash(){
+        Cursor c =db.rawQuery("SELECT menu,quantity FROM TABLE_DETAIL_1 WHERE quantity > 0",null);
+        while(c.moveToNext()){
+            String menu = c.getString(0);
+            Cursor c1 =db.rawQuery("SELECT num FROM SELLER_LIST WHERE menu ='"+menu+"'",null);
+            c1.moveToNext();
+            int num = c1.getInt(0);
+            db.execSQL("UPDATE SELLER_LIST SET num = " + (num- +c.getInt(1))+" WHERE menu='" + menu + "';");
+
+            //자동발주 부분
+            Cursor c2 = db.rawQuery("SELECT auto,num,fkey FROM SELLER_LIST WHERE menu ='"+menu+"'",null);
+            c2.moveToNext();
+            int autoBound = c2.getInt(0);
+            int nowNum = c2.getInt(1);
+            int key = c2.getInt(2);
+            c2 = db.rawQuery("SELECT menu FROM MENU_COMPANY  WHERE _id = '"+key+"';",null);
+            c2.moveToNext();
+            final String getMenu = c.getString(0);
+            int orderNum;
+            if(nowNum < autoBound){
+                orderNum = autoBound*3/2 -nowNum;
+                c2 = db.rawQuery("SELECT buy FROM BUY_SELLER  WHERE fkey ='"+ key + "';",null);
+                c2.moveToNext();
+                int use = c2.getInt(0);
+                if(use == 0){
+                    db.execSQL("INSERT INTO COMPANY_PRODUCT VALUES(null,'"+ getMenu +"','"+ key + "','"+orderNum+"');");
+                    db.execSQL("UPDATE BUY_SELLER SET buy = 1 WHERE fkey ='"+ key + "';");
+                    //자동발주 완료
+                }
+            }
+        }
+
         Cursor cursor = db.rawQuery("SELECT total_price FROM TablePrice WHERE _id = "+tableNum+";",null);
         cursor.moveToFirst();
         int sum123 = cursor.getInt(0);
@@ -131,6 +174,36 @@ public class TableActivity extends AppCompatActivity {
     }
 
     public void payInCard(){
+        Cursor c =db.rawQuery("SELECT menu,quantity FROM TABLE_DETAIL_1 WHERE quantity > 0",null);
+        while(c.moveToNext()){
+            String menu = c.getString(0);
+            Cursor c1 =db.rawQuery("SELECT num FROM SELLER_LIST WHERE menu ='"+menu+"'",null);
+            c1.moveToNext();
+            int num = c1.getInt(0);
+            db.execSQL("UPDATE SELLER_LIST SET num = " + (num- +c.getInt(1))+" WHERE menu='" + menu + "';");
+
+            //자동발주 부분
+            Cursor c2 = db.rawQuery("SELECT auto,num,fkey FROM SELLER_LIST WHERE menu ='"+menu+"'",null);
+            c2.moveToNext();
+            int autoBound = c2.getInt(0);
+            int nowNum = c2.getInt(1);
+            int key = c2.getInt(2);
+            c2 = db.rawQuery("SELECT menu FROM MENU_COMPANY  WHERE _id = '"+key+"';",null);
+            c2.moveToNext();
+            final String getMenu = c.getString(0);
+            int orderNum;
+            if(nowNum < autoBound){
+                orderNum = autoBound*3/2 -nowNum;
+                c2 = db.rawQuery("SELECT buy FROM BUY_SELLER  WHERE fkey ='"+ key + "';",null);
+                c2.moveToNext();
+                int use = c2.getInt(0);
+                if(use == 0){
+                    db.execSQL("INSERT INTO COMPANY_PRODUCT VALUES(null,'"+ getMenu +"','"+ key + "','"+orderNum+"');");
+                    db.execSQL("UPDATE BUY_SELLER SET buy = 1 WHERE fkey ='"+ key + "';");
+                    //자동발주 완료
+                }
+            }
+        }
         Cursor cursor = db.rawQuery("SELECT total_price FROM TablePrice WHERE _id = '"+tableNum+"';",null);
         cursor.moveToFirst();
         int sum123 = cursor.getInt(0);
